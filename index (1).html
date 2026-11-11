@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ΨΑΛΤΙΚΟΝ ΑΝΑΛΟΓΙΟΝ – Βυζαντινή μουσική</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=GFS+Didot&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#3b0f2e;--wine:#6b1426;--gold:#e0b04a;--gold-d:#9c7420;--cream:#f6e8c8;--ink:#1c0812;--lapis:#1f3a6e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:"GFS Didot",Georgia,serif;
+background:
+ radial-gradient(circle at 50% 0,rgba(224,176,74,.18),transparent 55%),
+ radial-gradient(circle,rgba(224,176,74,.10) 1.5px,transparent 2px) 0 0/22px 22px,
+ linear-gradient(180deg,var(--wine),var(--purple) 55%,var(--ink)) fixed}
+.band{height:28px;background-color:var(--ink);border-block:3px solid var(--gold);
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='22'><path d='M14 2l9 9-9 9-9-9z' fill='none' stroke='%23e0b04a' stroke-width='2'/><path d='M14 7v8M10 11h8' stroke='%23e0b04a' stroke-width='2'/></svg>");background-position:center}
+header{text-align:center;padding:22px 12px 4px}
+.cross{color:var(--gold);font-size:1.8rem;line-height:1}
+h1{font-family:"Cinzel Decorative",Cinzel,serif;margin:4px 0;font-size:clamp(1.5rem,5.5vw,2.8rem);letter-spacing:.08em;color:var(--gold);text-shadow:0 2px 0 #000,0 0 18px rgba(224,176,74,.35)}
+header p{margin:6px 0 0;font-style:italic;font-size:1.05rem;opacity:.92}
+main{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:22px;grid-template-columns:1fr 1.1fr}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+.panel{background:rgba(28,8,18,.82);border:3px solid var(--gold);outline:1px solid var(--gold-d);outline-offset:4px;border-radius:10px;padding:18px;box-shadow:0 8px 26px #000b}
+.player{text-align:center;border-radius:160px 160px 10px 10px;padding-top:26px}
+.disc{width:min(230px,62vw);aspect-ratio:1;margin:4px auto 14px;border-radius:50%;position:relative;
+background:
+ radial-gradient(circle,var(--gold) 0 7%,transparent 8%),
+ radial-gradient(circle,transparent 0 30%,var(--gold-d) 31% 33%,var(--wine) 34% 62%,var(--gold-d) 63% 65%,var(--lapis) 66% 86%,var(--gold) 87% 93%,var(--ink) 94%);
+border:4px solid var(--gold);display:grid;place-items:center;animation:spin 8s linear infinite;animation-play-state:paused}
+.disc::before{content:"";position:absolute;inset:0;background:
+ linear-gradient(var(--gold),var(--gold)) 50% 50%/10% 62% no-repeat,
+ linear-gradient(var(--gold),var(--gold)) 50% 50%/62% 10% no-repeat;border-radius:50%;opacity:.95}
+.disc.on{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.now{font-family:Cinzel,serif;color:var(--gold);min-height:3em;font-size:1.05rem;margin:4px 0}
+.ctrl{display:flex;gap:10px;justify-content:center;margin:10px 0}
+button{font:inherit;cursor:pointer;color:var(--cream);background:var(--purple);border:2px solid var(--gold);border-radius:8px;padding:8px 14px}
+button:hover{background:var(--wine)}
+button.big{font-size:1.5rem;min-width:64px}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.time{display:flex;justify-content:space-between;font-size:.85rem;opacity:.85}
+.vol{display:flex;align-items:center;gap:8px;margin-top:8px}
+h2{font-family:Cinzel,serif;color:var(--gold);margin:0 0 10px;font-size:1.1rem;letter-spacing:.08em}
+ol{list-style:none;margin:0;padding:0;max-height:430px;overflow-y:auto}
+li button{width:100%;text-align:left;display:flex;gap:10px;align-items:center;margin-bottom:6px;background:rgba(107,20,38,.55)}
+li button.cur{background:var(--gold);color:var(--ink)}
+.num{font-family:Cinzel,serif;min-width:2.2em;text-align:center;border:1px solid currentColor;border-radius:50%;padding:2px 0;font-size:.85rem}
+.empty{opacity:.85;font-style:italic;padding:8px 2px}
+.load{margin-top:12px;padding-top:12px;border-top:1px dashed var(--gold);font-size:.9rem}
+.load label{display:inline-block;cursor:pointer;background:var(--lapis);border:2px solid var(--gold);border-radius:8px;padding:8px 12px;margin-top:6px}
+footer{text-align:center;padding:14px 16px 30px;opacity:.85;font-size:.85rem;line-height:1.6;max-width:760px;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="band"></div>
+<header>
+  <div class="cross">☩</div>
+  <h1>ΨΑΛΤΙΚΟΝ ΑΝΑΛΟΓΙΟΝ</h1>
+  <p>Ύμνοι και ψαλμοί της Βυζαντινής μουσικής</p>
+</header>
+<main>
+  <section class="panel player">
+    <div class="disc" id="disc"></div>
+    <div class="now" id="now">Επίλεξε έναν ύμνο από τον κατάλογο</div>
+    <input type="range" id="seek" min="0" max="100" value="0" step="0.1">
+    <div class="time"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+    <div class="ctrl">
+      <button id="prev" title="Προηγούμενο">⏮</button>
+      <button id="play" class="big" title="Αναπαραγωγή / Παύση">▶</button>
+      <button id="next" title="Επόμενο">⏭</button>
+    </div>
+    <div class="vol">🔈<input type="range" id="vol" min="0" max="1" step="0.01" value="0.8">🔊</div>
+  </section>
+
+  <section class="panel">
+    <h2>ΚΑΤΑΛΟΓΟΣ ΥΜΝΩΝ</h2>
+    <ol id="list"><li class="empty">Φόρτωση καταλόγου…</li></ol>
+    <div class="load">
+      Θέλεις να ακούσεις άλλα αρχεία από τον υπολογιστή σου;<br>
+      <label>📜 Φόρτωση αρχείων<input id="files" type="file" accept="audio/*" multiple hidden></label>
+    </div>
+  </section>
+</main>
+<footer>
+  Η μουσική προέρχεται από ηχογραφήσεις βυζαντινής μουσικής <span id="source">[συμπληρώστε την πηγή / τον δίσκο]</span>.<br>
+  Τα δικαιώματα ανήκουν στους δημιουργούς και τους κατόχους τους. Η χρήση γίνεται αποκλειστικά για εκπαιδευτικούς σκοπούς, χωρίς κερδοσκοπικό χαρακτήρα.
+</footer>
+<div class="band"></div>
+<audio id="a"></audio>
+
+<script>
+const $=id=>document.getElementById(id), a=$('a');
+// Προαιρετικά: γράψε εδώ τα κομμάτια με δικούς σου τίτλους, π.χ. {title:'Κύριε ελέησον',file:'kyrie.mp3'}.
+// Αν η λίστα μείνει άδεια, ο κατάλογος φτιάχνεται αυτόματα από τα αρχεία ήχου του αποθετηρίου.
+const SONGS=[];
+const REPO='chleontari/BYZANTIUM';
+let tracks=[], idx=-1;
+const fmt=s=>isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
+const clean=n=>n.replace(/\.[^.]+$/,'').replace(/_/g,' ').trim();
+
+async function init(){
+  if(SONGS.length){tracks=SONGS.map(d=>({title:d.title,url:encodeURI(d.file)}));return render()}
+  try{
+    const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/');
+    const j=await r.json();
+    tracks=j.filter(f=>f.type==='file'&&/\.(mp3|wav|m4a|ogg|aac|flac)$/i.test(f.name))
+      .sort((x,y)=>x.name.localeCompare(y.name,'el',{numeric:true}))
+      .map(f=>({title:clean(f.name),url:encodeURI(f.name)}));
+  }catch(e){tracks=[]}
+  render();
+}
+$('files').onchange=e=>{
+  const fs=[...e.target.files].sort((x,y)=>x.name.localeCompare(y.name,'el',{numeric:true}));
+  tracks=fs.map(f=>({title:clean(f.name),url:URL.createObjectURL(f)}));
+  idx=-1; render();
+};
+function render(){
+  const ol=$('list'); ol.innerHTML='';
+  if(!tracks.length){ol.innerHTML='<li class="empty">Δεν βρέθηκαν αρχεία ήχου. Φόρτωσέ τα από τον υπολογιστή σου.</li>';return}
+  tracks.forEach((t,i)=>{
+    const li=document.createElement('li'), b=document.createElement('button');
+    b.className=i===idx?'cur':'';
+    b.innerHTML='<span class="num">'+(i+1)+'</span><span></span>';
+    b.lastChild.textContent=t.title;
+    b.onclick=()=>choose(i);
+    li.appendChild(b); ol.appendChild(li);
+  });
+}
+function choose(i){
+  if(!tracks.length)return;
+  idx=(i+tracks.length)%tracks.length;
+  a.src=tracks[idx].url; a.play().catch(()=>{});
+  $('now').textContent='☩ '+tracks[idx].title;
+  render();
+}
+$('play').onclick=()=>{ if(idx<0)return choose(0); a.paused?a.play():a.pause() };
+$('next').onclick=()=>choose(idx+1);
+$('prev').onclick=()=>choose(idx-1);
+a.onplay=()=>{$('play').textContent='⏸';$('disc').classList.add('on')};
+a.onpause=()=>{$('play').textContent='▶';$('disc').classList.remove('on')};
+a.onended=()=>choose(idx+1);
+a.onerror=()=>{$('now').textContent='⚠ Δεν φορτώθηκε το αρχείο'};
+a.ontimeupdate=()=>{ $('cur').textContent=fmt(a.currentTime); if(a.duration)$('seek').value=a.currentTime/a.duration*100 };
+a.onloadedmetadata=()=>$('dur').textContent=fmt(a.duration);
+$('seek').oninput=e=>{ if(a.duration)a.currentTime=e.target.value/100*a.duration };
+$('vol').oninput=e=>a.volume=e.target.value; a.volume=.8;
+init();
+</script>
+</body>
+</html>
