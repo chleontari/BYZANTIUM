@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Γλωσσάρι: Μουσική, πόλεμος, Ρώμη και Βυζάντιο</title>
+<style>
+:root{--bg:#f6ecd9;--card:#fffaf0;--ink:#2b1d14;--acc:#a63a22;--gold:#d9a441;--line:#e0cfae;--hl:#f9dc8f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1611;--card:#2a2019;--ink:#f3e6cf;--acc:#e0714b;--gold:#e5b655;--line:#4a3a2c;--hl:#5b4520}}
+:root[data-theme="dark"]{--bg:#1d1611;--card:#2a2019;--ink:#f3e6cf;--acc:#e0714b;--gold:#e5b655;--line:#4a3a2c;--hl:#5b4520}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Palatino Linotype",serif;font-size:18px;line-height:1.6}
+#app{max-width:760px;margin:0 auto;padding:14px 14px 200px}
+.meander{height:12px;background:repeating-linear-gradient(90deg,var(--acc) 0 14px,transparent 14px 20px,var(--acc) 20px 24px,transparent 24px 34px);opacity:.8;border-radius:3px;margin:6px 0 12px}
+h1{font-size:1.6rem;color:var(--acc);margin:.2em 0}
+h2{font-size:1.25rem;margin:1.2em 0 .4em}
+h3{font-size:1.05rem;margin:.9em 0 .2em;color:var(--acc)}
+.box{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.box p{margin:.4em 0}
+.box ul{margin:.3em 0;padding-left:1.2em}
+.hint{font-size:.88rem;opacity:.8}
+.t{font:inherit;color:inherit;background:none;border:0;padding:0 2px;cursor:pointer;border-bottom:2px dotted var(--acc)}
+.t.m{font-weight:bold;background:var(--hl);border-radius:4px;border-bottom:2px solid var(--acc);padding:0 4px}
+.t:hover,.t:focus-visible{background:var(--hl);outline:none}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+input[type=search]{flex:1 1 220px;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.chip,.btn{font:inherit;font-size:.9rem;color:inherit;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn{border-radius:10px}
+.grid{display:grid;gap:10px}
+.c{background:var(--card);border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.c.flash{border-color:var(--acc);box-shadow:0 0 0 3px var(--hl)}
+.c>button{width:100%;display:flex;gap:10px;align-items:center;text-align:left;font:inherit;font-weight:bold;color:inherit;background:none;border:0;padding:12px 14px;cursor:pointer}
+.c .em{font-size:1.5rem}.c .tag{margin-left:auto;font-size:.75rem;font-weight:normal;opacity:.7;text-align:right}
+.c .body{display:none;padding:0 14px 14px}
+.c.open .body{display:block}
+.ex{font-size:.95rem;border-left:4px solid var(--gold);padding-left:10px;margin-top:8px}
+#sheet{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:4px solid var(--acc);padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));transform:translateY(110%);transition:transform .25s;box-shadow:0 -6px 20px rgba(0,0,0,.25);max-height:60vh;overflow:auto}
+#sheet.show{transform:none}
+#sheet .in{max-width:760px;margin:0 auto;position:relative}
+#sheet h3{margin:0 0 4px;font-size:1.2rem}
+#x{position:absolute;right:0;top:0}
+.none{text-align:center;opacity:.7;padding:20px}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="meander"></div>
+<h1>⚔️ Γλωσσάρι: Μουσική, πόλεμος, Ρώμη και Βυζάντιο</h1>
+<div class="box">
+<h3>⚔️ Η μουσική στον πόλεμο</h3><p id="p1"></p>
+<h3>🏛️ Η Ρωμαϊκή περίοδος</h3><p id="p2"></p>
+<ul><li><b>Πόλεμος:</b> πολεμικοί παιάνες, ρόλος του αυλητή στα πολεμικά καράβια (ρυθμός στους κωπηλάτες).</li><li><b>Ρωμαϊκή περίοδος (από το 200 π.Χ.):</b> διατήρηση ελληνικών βάσεων, πομπώδης και επιβλητικός χαρακτήρας, θριαμβευτικές υποδοχές και παρελάσεις με σάλπιγγες.</li></ul>
+<h3>⛪ Το Βυζάντιο</h3><p id="p3"></p><p id="p4"></p>
+<p class="hint">👆 Πάτα τις <b>έντονες</b> λέξεις (και αυτές με τις τελείες) για να δεις τι σημαίνουν.</p>
+</div>
+<h2>📖 Όλοι οι όροι</h2>
+<div class="bar"><input type="search" id="q" placeholder="🔍 Ψάξε έναν όρο…" aria-label="Αναζήτηση"></div>
+<div class="bar" id="chips"></div>
+<div class="bar"><button class="btn" id="tg">Άνοιγμα όλων</button><span class="hint" id="n"></span></div>
+<div class="grid" id="list"></div>
+</div>
+<div id="sheet" role="dialog" aria-live="polite"><div class="in"><button class="btn" id="x" aria-label="Κλείσιμο">✕</button><div id="sb"></div></div></div>
+<script>
+const CATS=["Όλα","Πόλεμος","Ρώμη","Βυζάντιο","Λαϊκή παράδοση"];
+// [κλειδί, όρος, κατηγορία, emoji, ορισμός, παράδειγμα, 1 = έντονος όρος του κειμένου]
+const D=[
+["polemos","Πόλεμος","Πόλεμος","⚔️","Η σύγκρουση ανάμεσα σε στρατούς ή πόλεις. Στην αρχαιότητα η μουσική ήταν ζωτικής σημασίας στον πόλεμο.","Η μουσική έδινε θάρρος, ρυθμό και σήματα στους στρατιώτες.",1],
+["paian","Πολεμικοί παιάνες","Πόλεμος","🛡️","Πολεμικά τραγούδια που έδιναν θάρρος στους στρατιώτες πριν και κατά τη μάχη.","Οι στρατιώτες τραγουδούσαν τον παιάνα πριν ριχτούν στη μάχη.",1],
+["empsyx","Εμψυχώνω","Πόλεμος","💪","Δίνω θάρρος και δύναμη σε κάποιον.","Οι παιάνες εμψύχωναν τους στρατιώτες."],
+["strprep","Στρατιωτική προετοιμασία","Πόλεμος","🏃","Η εκπαίδευση και η προπόνηση των στρατιωτών πριν από τη μάχη.","Ακόμη και τότε οι παιάνες τούς συνόδευαν."],
+["pedio","Πεδίο της μάχης","Πόλεμος","🏟️","Ο τόπος όπου γίνεται η μάχη.","Εκεί οι σάλπιγγες έδιναν τα σήματα."],
+["trir","Τριήρης","Πόλεμος","⛵","Αρχαίο πολεμικό καράβι με τρεις σειρές κουπιά.","Οι τριήρεις κινούνταν με τη δύναμη των κωπηλατών."],
+["katast","Κατάστρωμα","Πόλεμος","🚢","Η επάνω επιφάνεια ενός πλοίου, όπου περπατούν οι άνθρωποι.","Ο αυλητής στεκόταν στο κατάστρωμα."],
+["avlit","Αυλητής","Πόλεμος","🎶","Ο μουσικός που παίζει αυλό. Στα πολεμικά καράβια έδινε τον ρυθμό στους κωπηλάτες.","Ο αυλός είναι πνευστό όργανο που το φυσούσαν για να βγει ήχος.",1],
+["kopl","Κωπηλάτες","Πόλεμος","🚣","Οι άνθρωποι που κινούν το πλοίο τραβώντας τα κουπιά.","Κωπηλατούσαν όλοι μαζί στον ρυθμό του αυλητή."],
+["kravgi","Ρυθμική κραυγή","Πόλεμος","📣","Δυνατή φωνή που φωνάζουν όλοι μαζί στον ρυθμό.","Οι κωπηλάτες απαντούσαν στον αυλητή με μια ρυθμική κραυγή."],
+["salp","Σάλπιγγα","Πόλεμος","🎺","Μεταλλικό πνευστό όργανο με πολύ δυνατό ήχο, που ακούγεται από μακριά.","Οι σάλπιγγες έδιναν τα σήματα της μάχης."],
+["amaz","Αμαζόνες","Πόλεμος","🏹","Γυναίκες πολεμίστριες της ελληνικής μυθολογίας.","Σε ένα αρχαίο αγγείο εικονίζεται μια Αμαζόνα που σαλπίζει για τη μάχη."],
+["simata","Σήματα της μάχης","Πόλεμος","🚩","Ήχοι που δείχνουν στους στρατιώτες τι πρέπει να κάνουν, όπως επίθεση ή υποχώρηση.","Δεν υπήρχαν ραδιόφωνα, γι’ αυτό χρησιμοποιούσαν ήχους."],
+["pxmx","π.Χ. και μ.Χ.","Ρώμη","📅","π.Χ. σημαίνει «προ Χριστού», δηλαδή πριν από τη γέννηση του Χριστού. μ.Χ. σημαίνει «μετά Χριστόν». Οι αριθμοί των π.Χ. χρόνων μικραίνουν όσο πλησιάζουμε στο σήμερα.","Το 200 π.Χ. είναι πιο παλιά από το 900 μ.Χ."],
+["katak","Κατάκτηση","Ρώμη","🏴","Όταν ένας λαός παίρνει με τη δύναμη των όπλων μια περιοχή.","Οι Ρωμαίοι κατέκτησαν τον ελλαδικό χώρο γύρω στο 200 π.Χ."],
+["romaioi","Ρωμαίοι","Ρώμη","🛡️","Οι κάτοικοι της Ρώμης. Δημιούργησαν μια τεράστια αυτοκρατορία και κατέκτησαν και την Ελλάδα.","Διατήρησαν τη μουσική των Ελλήνων.",1],
+["theoria","Θεωρία της μουσικής","Ρώμη","📐","Οι κανόνες και οι ιδέες πάνω στις οποίες στηρίζεται η μουσική, όπως οι κλίμακες και οι ρυθμοί.","Οι Ρωμαίοι κράτησαν τη θεωρία της ελληνικής μουσικής."],
+["yper","Υπερδύναμη","Ρώμη","💥","Πολύ ισχυρό κράτος, που επηρεάζει όλο τον κόσμο της εποχής του.","Η Ρώμη ήταν η στρατιωτική υπερδύναμη της εποχής."],
+["pomp","Πομπώδης και επιβλητική","Ρώμη","👑","Μουσική με μεγαλοπρέπεια, που κάνει εντύπωση και δείχνει δύναμη.","Η ρωμαϊκή μουσική με τις σάλπιγγες ακουγόταν μεγαλοπρεπής.",1],
+["thriamv","Θριαμβευτική υποδοχή","Ρώμη","🎉","Η μεγάλη υποδοχή ενός νικητή που γυρίζει μετά από μια νίκη.","Για τους νικητές στη Ρώμη ετοίμαζαν θριαμβευτικές υποδοχές με σάλπιγγες."],
+["parel","Στρατιωτική παρέλαση","Ρώμη","🥁","Πορεία στρατιωτών σε τάξη και με μουσική.","Σήμερα την παρακολουθούμε με στρατιωτική μπάντα."],
+["byz","Βυζαντινή Αυτοκρατορία","Βυζάντιο","🏰","Το κράτος που συνέχισε τη Ρωμαϊκή Αυτοκρατορία στην ανατολή, με πρωτεύουσα την Κωνσταντινούπολη και ελληνική γλώσσα.","Εδώ γεννήθηκε η βυζαντινή μουσική.",1],
+["xrist","Χριστιανισμός","Βυζάντιο","✝️","Η θρησκεία που βασίζεται στη διδασκαλία του Χριστού. Επικράτησε στη Βυζαντινή Αυτοκρατορία."," Έφερε μεγάλες αλλαγές στη μουσική."],
+["eidol","Ειδωλολατρία","Βυζάντιο","🗿","Η λατρεία πολλών θεών με αγάλματα (είδωλα), όπως των αρχαίων Ελλήνων και Ρωμαίων.","Εκεί κυριαρχούσαν η μουσική, ο χορός και τα όργανα."],
+["ypokr","Υπόκρουση","Βυζάντιο","🪕","Η μουσική των οργάνων που συνοδεύει ένα τραγούδι.","Στη λατρεία απαγορεύτηκε η μουσική υπόκρουση."],
+["latreia","Λατρεία","Βυζάντιο","🙏","Οι τελετές και οι προσευχές με τις οποίες οι πιστοί τιμούν τον Θεό.","Στη χριστιανική λατρεία δεν επιτρεπόταν να παίζουν όργανα."],
+["ekkl","Εκκλησιαστική μουσική (μόνο φωνητική)","Βυζάντιο","⛪","Η μουσική που ψάλλεται στην εκκλησία. Φωνητική σημαίνει ότι τη λένε μόνο με τη φωνή, χωρίς όργανα.","Μέχρι σήμερα η βυζαντινή μουσική ψάλλεται χωρίς όργανα.",1],
+["klim","Κλίμακα","Βυζάντιο","🪜","Σειρά από νότες που ανεβαίνουν ή κατεβαίνουν με συγκεκριμένη διάταξη.","Στη βυζαντινή μουσική οι κλίμακες ονομάστηκαν ήχοι."],
+["ihoi","Ήχοι","Βυζάντιο","🎼","Ο βυζαντινός όρος για τις κλίμακες. Κάθε ήχος έχει δικό του χαρακτήρα.","Η θεωρία ήταν των αρχαίων Ελλήνων, μόνο το όνομα άλλαξε.",1],
+["ymnod","Υμνωδός","Βυζάντιο","📜","Ο συνθέτης ή ο ψάλτης που γράφει και ψάλλει ύμνους.","Σπουδαίοι υμνωδοί ανέπτυξαν τη βυζαντινή εκκλησιαστική μουσική."],
+["moni","Μονές","Βυζάντιο","🏔️","Μοναστήρια, όπου ζουν μοναχοί ή μοναχές. Στη βυζαντινή εποχή ήταν και κέντρα μάθησης.","Εκεί γινόταν κυρίως η εκμάθηση της μουσικής.",1],
+["laiki","Λαϊκή μουσική","Λαϊκή παράδοση","🧑‍🤝‍🧑","Η μουσική του λαού, που τραγουδιέται στη ζωή και στις γιορτές, όχι στην εκκλησία.","Συνέχισε να υπάρχει παρά τις απαγορεύσεις.",1],
+["proforiki","Προφορική παράδοση","Λαϊκή παράδοση","🗣️","Όταν κάτι δεν γράφεται, αλλά το μαθαίνουμε ακούγοντάς το και περνά από γενιά σε γενιά.","Έτσι διατηρήθηκε η λαϊκή μουσική της εποχής."],
+["aion","9ος-10ος αιώνας μ.Χ.","Λαϊκή παράδοση","🕰️","Τα χρόνια από το 801 έως το 1000 μ.Χ. Ο αιώνας είναι περίοδος 100 ετών.","Τότε εμφανίζεται το ακριτικό τραγούδι.",1],
+["akrit","Ακριτικό τραγούδι","Λαϊκή παράδοση","🏇","Παλιό τραγούδι για τα κατορθώματα των ακριτών, των φρουρών των συνόρων της Βυζαντινής Αυτοκρατορίας.","Είναι ο άμεσος πρόγονος των δημοτικών μας τραγουδιών.",1],
+["dimot","Δημοτικό τραγούδι","Λαϊκή παράδοση","🎻","Παραδοσιακό τραγούδι του ελληνικού λαού, από άγνωστο δημιουργό, που άλλαζε από στόμα σε στόμα.","Έχει ρίζες στο ακριτικό τραγούδι."]
+];
+const T={p1:"Στον [[polemos|πόλεμο]], η μουσική ήταν ζωτικής σημασίας. Οι [[paian|πολεμικοί παιάνες]] συνόδευαν και [[empsyx|εμψύχωναν]] τους στρατιώτες στη [[strprep|στρατιωτική προετοιμασία]] και στο [[pedio|πεδίο της μάχης]]. Στα πολεμικά καράβια ([[trir|τριήρεις]]), ένας [[avlit|αυλητής]] στεκόταν στο [[katast|κατάστρωμα]] και έδινε τον ρυθμό στους [[kopl|κωπηλάτες]], οι οποίοι απαντούσαν με μια δυνατή [[kravgi|ρυθμική κραυγή]]. [[salp|Σαλπίγγες]] (όπως η πολεμική σάλπιγγα των [[amaz|Αμαζόνων]]) χρησιμοποιούνταν για τα [[simata|σήματα της μάχης]].",
+p2:"Μετά την [[katak|κατάκτηση]] του ελλαδικού χώρου (περίπου το 200 [[pxmx|π.Χ.]]), οι [[romaioi|Ρωμαίοι]] διατήρησαν τις βάσεις της ελληνικής μουσικής τόσο στη [[theoria|θεωρία]] όσο και στα όργανα. Ωστόσο, επειδή η Ρώμη ήταν η στρατιωτική [[yper|υπερδύναμη]] της εποχής, η μουσική έγινε [[pomp|πιο πομπώδης και επιβλητική]]. Χρησιμοποιούνταν σε [[thriamv|θριαμβευτικές υποδοχές]] νικητών και σε [[parel|στρατιωτικές παρελάσεις]] συνοδεία αρχαίων σαλπίγγων.",
+p3:"Η ίδρυση της [[byz|Βυζαντινής Αυτοκρατορίας]] και η επικράτηση του [[xrist|χριστιανισμού]] έφεραν τεράστια ανατροπή στη μουσική πραγματικότητα. Η νέα θρησκεία, στην προσπάθειά της να εξαφανίσει την [[eidol|ειδωλολατρία]] όπου κυριαρχούσαν η μουσική, ο χορός και τα όργανα, απαγόρευσε τη μουσική [[ypokr|υπόκρουση]] στη [[latreia|λατρεία]]. Έτσι, η [[ekkl|εκκλησιαστική μουσική έγινε αποκλειστικά φωνητική]].",
+p4:"Η βυζαντινή μουσική βασίστηκε στη θεωρία της μουσικής των αρχαίων Ελλήνων, αλλά άλλαξαν οι ονομασίες (π.χ. οι [[klim|κλίμακες]] ονομάστηκαν [[ihoi|ήχοι]]). Η τέχνη αυτή εξελίχθηκε από σπουδαίους [[ymnod|υμνωδούς]], ενώ η εκμάθησή της γινόταν κυρίως στις [[moni|μονές]]. Παράλληλα, μέτρα όπως η απαγόρευση μουσικής σε γάμους και κοινωνικές εκδηλώσεις δεν μπόρεσαν να σταματήσουν τη λαϊκή παράδοση. Η [[laiki|λαϊκή μουσική]] διατηρήθηκε [[proforiki|προφορικά]] από γενιά σε γενιά. Γύρω στον [[aion|9ο-10ο αιώνα μ.Χ.]] εμφανίζεται το [[akrit|ακριτικό τραγούδι]], το οποίο αποτελεί τον άμεσο πρόγονο των σύγχρονων [[dimot|δημοτικών μας τραγουδιών]]."};
+const M={};D.forEach(d=>M[d[0]]=d);
+const $=s=>document.querySelector(s);
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ς/g,"σ");
+for(const k in T)$("#"+k).innerHTML=T[k].replace(/\[\[(\w+)\|([^\]]+)\]\]/g,(_,key,txt)=>`<button class="t ${M[key][6]?"m":""}" onclick="show('${key}')">${txt}</button>`);
+let cat="Όλα",allOpen=false;
+D.sort((a,b)=>a[1].localeCompare(b[1],"el"));
+function cardBody(d){return `<p>${d[4]}</p><div class="ex">💬 ${d[5].trim()}</div>`}
+function render(){
+ const q=norm($("#q").value.trim());
+ const r=D.filter(d=>(cat=="Όλα"||d[2]==cat)&&(!q||norm(d[1]+" "+d[4]).includes(q)));
+ $("#n").textContent=r.length+" όροι";
+ $("#list").innerHTML=r.length?r.map(d=>`<div class="c ${allOpen?"open":""}" id="c-${d[0]}"><button onclick="this.parentNode.classList.toggle('open')"><span class="em">${d[3]}</span>${d[1]}<span class="tag">${d[2]}</span></button><div class="body">${cardBody(d)}</div></div>`).join(""):`<div class="none">Δεν βρέθηκε όρος. Δοκίμασε άλλη λέξη 🙂</div>`;
+}
+$("#chips").innerHTML=CATS.map(c=>`<button class="chip ${c==cat?"on":""}" data-c="${c}">${c}</button>`).join("");
+$("#chips").onclick=e=>{const c=e.target.dataset.c;if(!c)return;cat=c;[...$("#chips").children].forEach(b=>b.classList.toggle("on",b.dataset.c==c));render()};
+$("#q").oninput=render;
+$("#tg").onclick=()=>{allOpen=!allOpen;$("#tg").textContent=allOpen?"Κλείσιμο όλων":"Άνοιγμα όλων";document.querySelectorAll(".c").forEach(c=>c.classList.toggle("open",allOpen))};
+function show(k){
+ const d=M[k];
+ $("#sb").innerHTML=`<h3>${d[3]} ${d[1]}</h3><div class="hint">${d[2]}</div>${cardBody(d)}<button class="btn" style="margin-top:8px" onclick="goTo('${k}')">Δες στη λίστα ↓</button>`;
+ $("#sheet").classList.add("show");
+}
+function goTo(k){
+ cat="Όλα";$("#q").value="";[...$("#chips").children].forEach(b=>b.classList.toggle("on",b.dataset.c=="Όλα"));render();
+ $("#sheet").classList.remove("show");
+ const c=$("#c-"+k);c.classList.add("open","flash");c.scrollIntoView({block:"center"});setTimeout(()=>c.classList.remove("flash"),1800);
+}
+$("#x").onclick=()=>$("#sheet").classList.remove("show");
+render();
+</script>
+</body>
+</html>
